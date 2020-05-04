@@ -19,8 +19,8 @@ def post_list(request):
         posts = paginator.page(paginator.num_pages)
     return render(request, 'blog/post_list.html', {'posts':posts, 'page':page})
 
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post, slug = post,
+def post_detail(request, year, month, day, slug_post):
+    post = get_object_or_404(Post, slug = slug_post,
                                     published_date__year=year,
                                     published_date__month=month,
                                     published_date__day=day)
@@ -38,7 +38,24 @@ def post_new(request):
             return redirect("blog:post_detail",year = post.published_date.year,
                                          month = post.published_date.strftime("%m"),
                                          day = post.published_date.strftime("%d"),
-                                         post = post.slug)
+                                         slug_post = post.slug)
     else:
         form = PostForm()
-    return render(request, 'blog/post_new.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+def post_edit(request, year, month, day, slug_post):
+    post = get_object_or_404(Post, slug = slug_post,
+                                    published_date__year=year,
+                                    published_date__month=month,
+                                    published_date__day=day)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance = post)
+        if form.is_valid():
+            post = form.save()
+            return redirect("blog:post_detail",year = post.published_date.year,
+                                         month = post.published_date.strftime("%m"),
+                                         day = post.published_date.strftime("%d"),
+                                         slug_post = post.slug)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})

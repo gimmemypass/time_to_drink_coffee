@@ -27,6 +27,9 @@
     margin-left: 350px;
     width: 800px;
 }
+.content h2 a{
+	color: red;
+}
 .left-menu{
     top : 200;
     left: 80;

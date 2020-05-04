@@ -16,7 +16,9 @@
 		</div>
 	
 		<div class="left-menu">
-			<p><a href = "/blog/new/" >add a post</a></p>
+			{% if user.is_superuser %}
+				<p><a href = "/blog/new/" >add a post</a></p>
+			{% endif %}
 			<p><a href = "/blog/" >be normal</a></p>
 			<p><a href = "/" >spill coffee</a></p>
 		</div>
