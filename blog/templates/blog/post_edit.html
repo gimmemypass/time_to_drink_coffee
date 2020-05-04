@@ -1,8 +1,8 @@
 {% extends 'blog/base.html' %}
 
-{% block title %}new post{% endblock %}
+{% block title %}{{ type }}{% endblock %}
 {% block content %}
-	</h1> New post </h1>
+	<h4> {{ type }} </h4>
 	<form method="POST" class="post-form">{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit" class "save btn btn-default">Save</button>

@@ -41,7 +41,7 @@ def post_new(request):
                                          slug_post = post.slug)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'type': 'New post'})
 
 def post_edit(request, year, month, day, slug_post):
     post = get_object_or_404(Post, slug = slug_post,
@@ -58,4 +58,4 @@ def post_edit(request, year, month, day, slug_post):
                                          slug_post = post.slug)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'type': 'Editing'})
