@@ -14,5 +14,9 @@ urlpatterns = [
             r'(?P<slug_post>[-\w]+)/edit/$',
             views.post_edit,
             name='post_edit'),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/'\
+            r'(?P<slug_post>[-\w]+)/delete/$',
+            views.post_delete,
+            name='post_delete'),
 ]
 
